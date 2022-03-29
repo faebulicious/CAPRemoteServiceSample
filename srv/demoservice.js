@@ -4,89 +4,66 @@ class DemoService extends cds.ApplicationService {
     const ProductAPI = await cds.connect.to('PRODUCT_0001');
     const StockAPI = await cds.connect.to('API_MATERIAL_STOCK');
 
-    const { Product, ProductDescription, ProductData, ProductStock } = this.entities;
-
-    this.on("READ", [Product, ProductDescription], (req) => {
-      return ProductAPI.run(req.query);
-    });
+    const { ProductPlant } = ProductAPI.entities;
+    const { A_MatlStkInAcctMod : ProductStock } = StockAPI.entities;
+    const { ProductData } = this.entities;
 
     this.on("READ", ProductData, async (req) => {
 
+      // Build Query including Multi-Level Associations:
+      // ProductPlant --> Product --> Product Description
+      // ProductPlant --> Product --> Product Sales Delivery
+      const oQuery = SELECT.from(ProductPlant, p => {
+        p.Product, p.Plant, p.ProfileCode, p._Product (x => {
+          // Works not due to a CDS BUG!
+          //x.ProductType, x._ProductDescription[Language='DE'] (d => { // Limit to Language DE
+          //x.ProductType, x._ProductDescription[1: Language='DE'] (d => { // Reduce cardinality to one
+          x.ProductType, x._ProductDescription (d => {
+            d.ProductDescription
+          }),
+          x._ProductSalesDelivery (s => {
+            s.ProductSalesOrg, s.ProductDistributionChnl
+          }) 
+        })
+      // }).where({Product: 'D20_EPDM_SMRT_S'}); // Stock material example
+      }).limit(100);
 
-      const sLanguage = this.getLanguage(req.query.SELECT) || 'DE';
-      console.log(sLanguage);
+      const aProducts = await ProductAPI.tx(req).run(oQuery);
 
-      console.log(Product);
+      // Create new Array with Product IDs only
+      const aID = aProducts.map(oData => oData.Product);
 
-      // if (!this.hasLanguage(req.query.SELECT)) {
-        // if (!req.query.SELECT.where) {
-        //   req.query.SELECT.where = [];
-        // }
-        // req.query.SELECT.where.push(
-        //   {
-        //     ref: [
-        //       '_Product',
-        //       {
-        //         id: '_ProductDescription',
-        //         where: [
-        //           {
-        //             ref: ['Language']
-        //           },
-        //           '=',
-        //           {
-        //             val: 'DE'
-        //           }
-        //         ]
-        //       }
-        //     ]
-        //   }
-        // )
-      // }
+      // Fetch Stock for Products
+      const aStock = await StockAPI.tx(req).run(SELECT.from(ProductStock).columns(`Material as Product`,`Plant`,`MaterialBaseUnit as BaseUnit`, `MatlWrhsStkQtyInMatlBaseUnit as Stock`).where({Material: aID}));
 
-      const aProducts = await ProductAPI.run(req.query);
-
-      aProducts.forEach(oProduct => {
-        const oDesc = oProduct._Product?._ProductDescription?.find(oDesc => oDesc.Language === sLanguage);
-        if (oDesc) {
-          oProduct.Description = oDesc.Description;
-        } else {
-          oProduct.Description = '';
-        }
+      // Create a result map for aggregation of multiple stocks
+      // and faster Access to the result
+      const mStock = new Map();
+      aStock.forEach((oStock) => {
+        const sStockKey = this.getStockKey(oStock);
+        let iStock = mStock.get(sStockKey) || 0;
+        mStock.set(sStockKey, iStock + oStock.Stock);
       });
 
-      const aProductIDs = aProducts.map(oProduct => oProduct.Product);
+      // Flatten association to entity structure, add stock and
+      // remove association structure
+      return aProducts.map(oData => {
+        oData.ProductType = oData._Product?.ProductType || '';
+        oData.Description = oData._Product?._ProductDescription?.[0]?.ProductDescription || '';
+        oData.ProductSalesOrg = oData._Product?._ProductSalesDelivery?.[0]?.ProductSalesOrg || '';
 
-      const aStock = await StockAPI.run(SELECT.from(ProductStock).where({ Product: aProductIDs }));
+        oData.Stock = mStock.get(this.getStockKey(oData)) || 0;
 
-      return aProducts;
-    });
-
-    this.on("READ", ProductStock, (req) => {
-       StockAPI.run(req.query);
+        delete oData._Product;
+        return oData;
+      });
     });
 
     await super.init();
   }
 
-  getLanguage(oQuery) {
-    let sLanguage;
-    
-    oQuery.where?.forEach(oWhere => {
-      oWhere.ref?.forEach(oRef => {
-        if (oRef.id === '_ProductDescription') {
-          let isLanguage = false;
-          oRef.where.forEach(oDescWhere => {
-            if (oDescWhere.ref && oDescWhere.ref[0] === 'Language') {
-              isLanguage = true;
-            }
-            if (isLanguage && oDescWhere.val) {
-              sLanguage = oDescWhere.val;
-            }
-          });
-        }
-      });
-    });
-    return sLanguage;
+  getStockKey(oData) {
+    return `${oData.Product} ${oData.Plant}`;
   }
 }
 module.exports = { DemoService };

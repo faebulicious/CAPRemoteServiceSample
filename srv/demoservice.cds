@@ -4,62 +4,53 @@ using {API_MATERIAL_STOCK as APIStock} from './external/API_MATERIAL_STOCK';
 @path: '/demo'
 @impl: './demoservice.js'
 service DemoService {
-  entity Product as projection on APIProduct.Product {
-    key Product,
-        @Common.Label: 'BeGru'
-        AuthorizationGroup,
-        @Common.Label: 'Basis-ME'
-        BaseUnit,
-        _ProductDescription, //: redirected to ProductDescription
-  };
+  // entity Product as projection on APIProduct.Product {
+  //   *
+  // };
 
-  entity ProductDescription as projection on APIProduct.ProductDescription {
-    key Product,
-    @cds.
-    key Language,
-        @Common.Label: 'Beschreibung'
-        ProductDescription as Description
-  };
+  // entity ProductDescription as projection on APIProduct.ProductDescription {
+  //   *
+  // };
 
-  entity ProductData as projection on APIProduct.ProductPlant {
-    key Product,
-    key Plant,
-        ProfileCode,
-        _Product,
-        ' ' as Description: String(60),
-  };
+  // entity ProductPlant as projection on APIProduct.ProductPlant {
+  //   *
+  // };
 
-  entity ProductStock as projection on APIStock.A_MatlStkInAcctMod {
-    key Material as Product,
-    key Plant,
-        MaterialBaseUnit,
-        MatlWrhsStkQtyInMatlBaseUnit
-  }
+  entity ProductData {
+    key Product : String(40);
+    key Plant : String(4);
+        ProductType : String(4);
+        ProfileCode : String(2);
+        ProductSalesOrg: String(4);
+        Description: String(60);
+        Price : Decimal(23,2);
+        Stock : Integer;
+  };
 }
 
 annotate DemoService.ProductData with @(
-  UI: {
-    SelectionFields: [
-        Product,
-        _Product.BaseUnit,
-        _Product._ProductDescription.Language
-    ],
-    LineItem: [
-        {
-            Value: Product
-        },
-        {
-            Value: Plant
-        },
-        {
-            Value: _Product.BaseUnit
-        },
-        {
-            Value: Description
-        },
-        {
-            Value: _Product._ProductDescription.Description
-        }
-    ],
-  }
+  // UI: {
+  //   SelectionFields: [
+  //       Product,
+  //       _Product.BaseUnit,
+  //       _Product._ProductDescription.Language
+  //   ],
+  //   LineItem: [
+  //       {
+  //           Value: Product
+  //       },
+  //       {
+  //           Value: Plant
+  //       },
+  //       {
+  //           Value: _Product.BaseUnit
+  //       },
+  //       {
+  //           Value: Description
+  //       },
+  //       {
+  //           Value: _Product._ProductDescription.Description
+  //       }
+  //   ],
+  // }
 );
