@@ -1,12 +1,16 @@
-using {API_BUSINESS_PARTNER as APICloud} from '../srv/external/API_BUSINESS_PARTNER';
-using {OP_API_BUSINESS_PARTNER_SRV as APIOnPrem} from '../srv/external/OP_API_BUSINESS_PARTNER_SRV';
+using {PRODUCT_0001 as APIProduct} from '../srv/external/PRODUCT_0001.csn';
 
 namespace db;
 
-entity BusinessPartnerCloud as projection on APICloud.A_BusinessPartner {
-    key BusinessPartner as ID, BusinessPartnerFullName as fullName, BusinessPartnerIsBlocked as isBlocked
+entity Product as projection on APIProduct.Product {
+    key Product,
+        CrossPlantStatus,
+        BaseUnit,
+        NetWeight
 }
 
-entity BusinessPartnerOnPrem as projection on APIOnPrem.A_BusinessPartner {
-    key BusinessPartner as ID, BusinessPartnerFullName as fullName, BusinessPartnerIsBlocked as isBlocked
+entity ProductPlant as projection on APIProduct.ProductPlant {
+    key Product,
+    key Plant,
+        ProfileCode
 }

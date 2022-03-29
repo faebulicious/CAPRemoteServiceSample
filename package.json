@@ -6,12 +6,9 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@graphql-tools/schema": "^8.3.2",
     "@sap/cds": "^5",
     "@sap/cds-odata-v2-adapter-proxy": "^1.8.9",
-    "express": "^4",
-    "express-graphql": "^0.12.0",
-    "graphql": "^16.3.0"
+    "express": "^4"
   },
   "devDependencies": {
     "cds-swagger-ui-express": "^0.3.0",
@@ -53,35 +50,34 @@
       }
     },
     "features": {
-      "graphql": true,
-      "rest_new_adapter": true
+      "rest_new_adapter": true,
+      "odata_new_parser": true
     },
     "requires": {
-      "API_BUSINESS_PARTNER": {
-        "kind": "odata-v2",
-        "model": "srv\\external\\API_BUSINESS_PARTNER",
+      "PRODUCT_0001": {
+        "kind": "odata",
+        "model": "srv\\external\\PRODUCT_0001",
         "[development]": {
           "credentials": {
-            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0001"
           }
         },
         "[production]": {
           "destination": "TO_BE_DEFINED",
-          "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+          "path": "/sap/opu/odata/sap/..."
         }
       },
-      "OP_API_BUSINESS_PARTNER_SRV": {
+      "API_MATERIAL_STOCK": {
         "kind": "odata-v2",
-        "model": "srv\\external\\OP_API_BUSINESS_PARTNER_SRV",
+        "model": "srv\\external\\API_MATERIAL_STOCK",
         "[development]": {
           "credentials": {
-            "url": "",
-            "authentication": "BasicAuthentication"
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV"
           }
         },
         "[production]": {
           "destination": "TO_BE_DEFINED",
-          "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER/ "
+          "path": "/sap/opu/odata/sap/..."
         }
       }
     }

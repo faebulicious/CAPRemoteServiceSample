@@ -1,0 +1,2409 @@
+{
+  "meta": {
+    "creator": "cds-dk 4.8.2"
+  },
+  "$version": "2.0",
+  "definitions": {
+    "PRODUCT_0001.ProductValuation": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "ValuationArea": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ValuationType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "ValuationClass": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "PriceDeterminationControl": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "StandardPrice": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "ProductPriceUnitQuantity": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 0
+        },
+        "InventoryValuationProcedure": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "MovingAveragePrice": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "ValuationCategory": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProductUsageType": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProductOriginType": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "IsProducedInhouse": {
+          "type": "cds.Boolean"
+        },
+        "IsMarkedForDeletion": {
+          "type": "cds.Boolean"
+        },
+        "ValuationClassSalesOrderStock": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProjectStockValuationClass": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "Currency": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductValuationAccounting": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductValuationAccounting",
+          "cardinality": {
+            "max": 1
+          },
+          "keys": []
+        },
+        "_ProductValuationCosting": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductValuationCosting",
+          "cardinality": {
+            "max": 1
+          },
+          "keys": []
+        },
+        "_ProductValuationLedgerAccount": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductValuationLedgerAccount",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        },
+        "_ProductValuationLedgerPrices": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductValuationLedgerPrices",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        }
+      }
+    },
+    "PRODUCT_0001.ProductPlant": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "Plant": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProfileCode": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProfileValidityStartDate": {
+          "type": "cds.Date"
+        },
+        "FiscalYearVariant": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "PeriodType": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProfitCenter": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "IsMarkedForDeletion": {
+          "type": "cds.Boolean"
+        },
+        "ConfigurableProduct": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "StockDeterminationGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "IsBatchManagementRequired": {
+          "type": "cds.Boolean"
+        },
+        "SerialNumberProfile": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "IsNegativeStockAllowed": {
+          "type": "cds.Boolean"
+        },
+        "ProductCFOPCategory": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductIsExciseTaxRelevant": {
+          "type": "cds.Boolean"
+        },
+        "GoodsIssueUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "GoodsIssueISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "DistrCntrDistributionProfile": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductIsCriticalPrt": {
+          "type": "cds.Boolean"
+        },
+        "ProductLogisticsHandlingGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProductFreightGroup": {
+          "type": "cds.String",
+          "length": 8
+        },
+        "OriginalBatchReferenceProduct": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "OriglBatchManagementIsRequired": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductPlantCosting": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductPlantCosting",
+          "cardinality": {
+            "max": 1
+          },
+          "keys": []
+        },
+        "_ProductPlantSupplyPlanning": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductPlantSupplyPlanning",
+          "cardinality": {
+            "max": 1
+          },
+          "keys": []
+        },
+        "_ProductPlantWorkScheduling": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductPlantWorkScheduling",
+          "cardinality": {
+            "max": 1
+          },
+          "keys": []
+        }
+      }
+    },
+    "PRODUCT_0001.ProductQualityManagement": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "QltyMgmtInProcmtIsActive": {
+          "type": "cds.Boolean"
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.Product": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "ProductType": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "CreationDate": {
+          "type": "cds.Date"
+        },
+        "CreationTime": {
+          "type": "cds.Time"
+        },
+        "CreationDateTime": {
+          "type": "cds.Timestamp",
+          "@odata.precision": 7,
+          "@odata.type": "Edm.DateTimeOffset"
+        },
+        "CreatedByUser": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "LastChangeDate": {
+          "type": "cds.Date"
+        },
+        "LastChangedByUser": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "IsMarkedForDeletion": {
+          "type": "cds.Boolean"
+        },
+        "CrossPlantStatus": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "CrossPlantStatusValidityDate": {
+          "type": "cds.Date"
+        },
+        "ProductOldID": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "GrossWeight": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "WeightUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "WeightISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductGroup": {
+          "type": "cds.String",
+          "length": 9
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ItemCategoryGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "NetWeight": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "Division": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "VolumeUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "VolumeISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductVolume": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "AuthorizationGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "ANPCode": {
+          "type": "cds.String",
+          "length": 9
+        },
+        "SizeOrDimensionText": {
+          "type": "cds.String",
+          "length": 32
+        },
+        "IndustryStandardName": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "ProductStandardID": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "InternationalArticleNumberCat": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductIsConfigurable": {
+          "type": "cds.Boolean"
+        },
+        "IsBatchManagementRequired": {
+          "type": "cds.Boolean"
+        },
+        "ExternalProductGroup": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "CrossPlantConfigurableProduct": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "SerialNoExplicitnessLevel": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "IsApprovedBatchRecordReqd": {
+          "type": "cds.Boolean"
+        },
+        "HandlingIndicator": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "WarehouseProductGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "WarehouseStorageCondition": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "StandardHandlingUnitType": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "SerialNumberProfile": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "IsPilferable": {
+          "type": "cds.Boolean"
+        },
+        "IsRelevantForHzdsSubstances": {
+          "type": "cds.Boolean"
+        },
+        "QuarantinePeriod": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 0
+        },
+        "TimeUnitForQuarantinePeriod": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "QuarantinePeriodISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "QualityInspectionGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "HandlingUnitType": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "HasVariableTareWeight": {
+          "type": "cds.Boolean"
+        },
+        "MaximumPackagingLength": {
+          "type": "cds.Decimal",
+          "precision": 15,
+          "scale": 3
+        },
+        "MaximumPackagingWidth": {
+          "type": "cds.Decimal",
+          "precision": 15,
+          "scale": 3
+        },
+        "MaximumPackagingHeight": {
+          "type": "cds.Decimal",
+          "precision": 15,
+          "scale": 3
+        },
+        "MaximumCapacity": {
+          "type": "cds.Decimal",
+          "precision": 15,
+          "scale": 3
+        },
+        "OvercapacityTolerance": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 1
+        },
+        "UnitForMaxPackagingDimensions": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "MaxPackggDimensionISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseUnitSpecificProductLength": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "BaseUnitSpecificProductWidth": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "BaseUnitSpecificProductHeight": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "ProductMeasurementUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductMeasurementISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ArticleCategory": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "IndustrySector": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "LastChangeDateTime": {
+          "type": "cds.Timestamp",
+          "@odata.precision": 7,
+          "@odata.type": "Edm.DateTimeOffset"
+        },
+        "LastChangeTime": {
+          "type": "cds.Time"
+        },
+        "DangerousGoodsIndProfile": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductDocumentChangeNumber": {
+          "type": "cds.String",
+          "length": 6
+        },
+        "ProductDocumentPageCount": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductDocumentPageNumber": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "DocumentIsCreatedByCAD": {
+          "type": "cds.Boolean"
+        },
+        "ProductionOrInspectionMemoTxt": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "ProductionMemoPageFormat": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProductIsHighlyViscous": {
+          "type": "cds.Boolean"
+        },
+        "TransportIsInBulk": {
+          "type": "cds.Boolean"
+        },
+        "ProdEffctyParamValsAreAssigned": {
+          "type": "cds.Boolean"
+        },
+        "ProdIsEnvironmentallyRelevant": {
+          "type": "cds.Boolean"
+        },
+        "LaboratoryOrDesignOffice": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "PackagingProductGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "PackingReferenceProduct": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "BasicProduct": {
+          "type": "cds.String",
+          "length": 48
+        },
+        "ProductDocumentNumber": {
+          "type": "cds.String",
+          "length": 22
+        },
+        "ProductDocumentVersion": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductDocumentType": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductDocumentPageFormat": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "SAP__Messages": {
+          "items": {
+            "type": "PRODUCT_0001.SAP__Message"
+          }
+        },
+        "_ProductDescription": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductDescription",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        },
+        "_ProductPlant": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductPlant",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        },
+        "_ProductProcurement": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductProcurement",
+          "cardinality": {
+            "max": 1
+          },
+          "keys": []
+        },
+        "_ProductQualityManagement": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductQualityManagement",
+          "cardinality": {
+            "max": 1
+          },
+          "keys": []
+        },
+        "_ProductSales": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductSales",
+          "cardinality": {
+            "max": 1
+          },
+          "keys": []
+        },
+        "_ProductSalesDelivery": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductSalesDelivery",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        },
+        "_ProductUnitOfMeasure": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductUnitOfMeasure",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        },
+        "_ProductValuation": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductValuation",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        }
+      }
+    },
+    "PRODUCT_0001.ProductSales": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "SalesStatus": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "SalesStatusValidityDate": {
+          "type": "cds.Date"
+        },
+        "TransportationGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProdSalesDeliverySalesTax": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "Country": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductSalesTaxCategory": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProductSalesOrg": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProductDistributionChnl": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductTaxClassification": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductSalesDelivery": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductSalesDelivery",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_ProductSalesDelivery",
+                "ProductDistributionChnl"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ProductDistributionChnl"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductValuationLedgerPrices": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "ValuationArea": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ValuationType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "CurrencyRole": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "Ledger": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductPriceUnitQuantity": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 0
+        },
+        "Currency": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "FuturePrice": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "FuturePriceValidityStartDate": {
+          "type": "cds.Date"
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductValuation": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductValuation",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_ProductValuation",
+                "ValuationType"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ValuationType"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductProcurement": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "PurchaseOrderQuantityUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "PurchaseOrderQuantityISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "VarblPurOrdUnitStatus": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "PurchasingAcknProfile": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductPlantCosting": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "Plant": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "IsCoProduct": {
+          "type": "cds.Boolean"
+        },
+        "CostingLotSize": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "TaskListGroup": {
+          "type": "cds.String",
+          "length": 8
+        },
+        "TaskListType": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "CostingSpecialProcurementType": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "SourceBOMAlternative": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductBOMUsage": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProductIsCostingRelevant": {
+          "type": "cds.Boolean"
+        },
+        "TaskListGroupCounter": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "VarianceKey": {
+          "type": "cds.String",
+          "length": 6
+        },
+        "CostingProductionVersion": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "IsFixedPriceCoProduct": {
+          "type": "cds.Boolean"
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductPlant": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductPlant",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_ProductPlant",
+                "Plant"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Plant"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductValuationAccounting": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "ValuationArea": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ValuationType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "CommercialPrice1InCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "CommercialPrice2InCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "CommercialPrice3InCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "DevaluationYearCount": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "FuturePrice": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "FuturePriceValidityStartDate": {
+          "type": "cds.Date"
+        },
+        "LIFOValuationPoolNumber": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "TaxPricel1InCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "TaxPrice2InCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "TaxPrice3InCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "TaxBasedPricesPriceUnitQty": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 0
+        },
+        "Currency": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductValuation": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductValuation",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_ProductValuation",
+                "ValuationType"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ValuationType"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductUnitOfMeasure": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "AlternativeUnit": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "QuantityNumerator": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 0
+        },
+        "QuantityDenominator": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 0
+        },
+        "ProductVolume": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "VolumeUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "VolumeISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "GrossWeight": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "WeightUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "WeightISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "GlobalTradeItemNumber": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "GlobalTradeItemNumberCategory": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "UnitSpecificProductLength": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "UnitSpecificProductWidth": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "UnitSpecificProductHeight": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "ProductMeasurementUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductMeasurementISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "LowerLevelPackagingUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "LowerLevelPackagingISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "MaximumStackingFactor": {
+          "type": "cds.Integer"
+        },
+        "CapacityUsage": {
+          "type": "cds.Decimal",
+          "precision": 15,
+          "scale": 3
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductUnitOfMeasureEAN": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductUnitOfMeasureEAN",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        }
+      }
+    },
+    "PRODUCT_0001.ProductSalesDelivery": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "ProductSalesOrg": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProductDistributionChnl": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "MinimumOrderQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "SupplyingPlant": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "PriceSpecificationProductGroup": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "AccountDetnProductGroup": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "DeliveryNoteProcMinDelivQty": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "ItemCategoryGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "DeliveryQuantityUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "DeliveryQuantityISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "DeliveryQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "ProductSalesStatus": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductSalesStatusValidityDate": {
+          "type": "cds.Date"
+        },
+        "SalesMeasureUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "SalesMeasureISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "IsMarkedForDeletion": {
+          "type": "cds.Boolean"
+        },
+        "FirstSalesSpecProductGroup": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "SecondSalesSpecProductGroup": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ThirdSalesSpecProductGroup": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "FourthSalesSpecProductGroup": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "FifthSalesSpecProductGroup": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "LogisticsStatisticsGroup": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "VolumeRebateGroup": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "CashDiscountIsDeductible": {
+          "type": "cds.Boolean"
+        },
+        "RoundingProfile": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "VariableSalesUnitIsNotAllowed": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID01": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID02": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID03": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID04": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID05": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID06": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID07": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID08": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID09": {
+          "type": "cds.Boolean"
+        },
+        "ProductHasAttributeID10": {
+          "type": "cds.Boolean"
+        },
+        "ProdIsEntlmntRlvt": {
+          "type": "cds.Boolean"
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_ProdSalesDeliverySalesTax": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProdSalesDeliverySalesTax",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductValuationCosting": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "ValuationArea": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ValuationType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "ProductIsCostedWithQtyStruc": {
+          "type": "cds.Boolean"
+        },
+        "IsMaterialRelatedOrigin": {
+          "type": "cds.Boolean"
+        },
+        "CostOriginGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "CostingOverheadGroup": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "PlannedPrice1InCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "PlannedPrice2InCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "PlannedPrice3InCoCodeCrcy": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "FuturePlndPrice1ValdtyDate": {
+          "type": "cds.Date"
+        },
+        "FuturePlndPrice2ValdtyDate": {
+          "type": "cds.Date"
+        },
+        "FuturePlndPrice3ValdtyDate": {
+          "type": "cds.Date"
+        },
+        "Currency": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductValuation": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductValuation",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_ProductValuation",
+                "ValuationType"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ValuationType"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductValuationLedgerAccount": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "ValuationArea": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ValuationType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "CurrencyRole": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "Ledger": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductPriceControl": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProductPriceUnitQuantity": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 0
+        },
+        "Currency": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "MovingAveragePrice": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "StandardPrice": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductValuation": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductValuation",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_ProductValuation",
+                "ValuationType"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ValuationType"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductDescription": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "Language": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductDescription": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductUnitOfMeasureEAN": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "AlternativeUnit": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "ConsecutiveNumber": {
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "ProductStandardID": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "InternationalArticleNumberCat": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "IsMainGlobalTradeItemNumber": {
+          "type": "cds.Boolean"
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductUnitOfMeasure": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductUnitOfMeasure",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_ProductUnitOfMeasure",
+                "AlternativeUnit"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "AlternativeUnit"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductPlantWorkScheduling": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "Plant": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProductBaseQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "UnlimitedOverDelivIsAllowed": {
+          "type": "cds.Boolean"
+        },
+        "OverDeliveryTolerancePercent": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 1
+        },
+        "UnderDeliveryTolerancePercent": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 1
+        },
+        "ProductionInvtryManagedLoc": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProductionOrderBatchCode": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProdIsWithdrawnFrmProdnBin": {
+          "type": "cds.Boolean"
+        },
+        "TransitionMatrixProductsGroup": {
+          "type": "cds.String",
+          "length": 20
+        },
+        "OrderChangeManagementProfile": {
+          "type": "cds.String",
+          "length": 6
+        },
+        "ProductComponentBackflushCode": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "SetupAndTeardownTime": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 2
+        },
+        "ProductionSchedulingProfile": {
+          "type": "cds.String",
+          "length": 6
+        },
+        "TransitionTime": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 2
+        },
+        "ProcessingTimeInDays": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 2
+        },
+        "ProductionSupervisor": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductProductionQuantityUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProdProductionQuantityISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductPlant": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductPlant",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_ProductPlant",
+                "Plant"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Plant"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.ProductPlantSupplyPlanning": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 18
+        },
+        "Plant": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "FixedLotSizeQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "MaximumLotSizeQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "MinimumLotSizeQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "LotSizeRoundingQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "LotSizingProcedure": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "MRPType": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "MRPResponsible": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "SafetyStockQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "MinimumSafetyStockQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "PlanningTimeFence": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ConsumptionValueCategory": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "MaximumStockQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "ReorderThresholdQuantity": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "PlannedDeliveryDurationInDays": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 0
+        },
+        "SafetySupplyDurationInDays": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "PlanningStrategyGroup": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "TotalReplenishmentLeadTime": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 0
+        },
+        "ProcurementType": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProcurementSubType": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "AssemblyScrapPercent": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 2
+        },
+        "AvailabilityCheckType": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "GoodsReceiptDuration": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 0
+        },
+        "PlanAndOrderDayDetermination": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "RoundingProfile": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "DfltStorageLocationExtProcmt": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "MRPGroup": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "LotSizeIndependentCosts": {
+          "type": "cds.Decimal",
+          "precision": 22,
+          "scale": 11
+        },
+        "RqmtQtyRcptTaktTmeInWrkgDays": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 0
+        },
+        "MRPPlanningCalendar": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "RangeOfCvrgPrflCode": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductSafetyTimeMRPRelevance": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "SafetyTimePeriodProfile": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "DependentRqmtMRPRelevance": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProductServiceLevelInPercent": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 1
+        },
+        "ProdInhProdnDurationInWorkDays": {
+          "type": "cds.Decimal",
+          "precision": 3,
+          "scale": 0
+        },
+        "MRPAvailabilityType": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "CrossProjectProduct": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "StorageCostsPercentageCode": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "FollowUpProduct": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "RepetitiveManufacturingIsAllwd": {
+          "type": "cds.Boolean"
+        },
+        "DependentRequirementsType": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProductIsBulkComponent": {
+          "type": "cds.Boolean"
+        },
+        "RepetitiveManufacturingProfile": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "BackwardCnsmpnPeriodInWorkDays": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "FwdConsumptionPeriodInWorkDays": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProdRqmtsConsumptionMode": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProdFcstRequirementsSplitCode": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "EffectiveOutDate": {
+          "type": "cds.Date"
+        },
+        "SchedulingFloatProfile": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ComponentScrapInPercent": {
+          "type": "cds.Decimal",
+          "precision": 5,
+          "scale": 2
+        },
+        "ProductDiscontinuationCode": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProductRequirementsGrouping": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProductionInvtryManagedLoc": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "ProductComponentBackflushCode": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ProposedProductSupplyArea": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "MRPSafetyStockMethod": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "Currency": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BaseISOUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "_Product": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.Product",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_Product",
+                "Product"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Product"
+              ]
+            }
+          ]
+        },
+        "_ProductPlant": {
+          "type": "cds.Association",
+          "@cds.ambiguous": "missing on condition?",
+          "target": "PRODUCT_0001.ProductPlant",
+          "cardinality": {
+            "max": 1
+          },
+          "on": [
+            {
+              "ref": [
+                "_ProductPlant",
+                "Plant"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "Plant"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "PRODUCT_0001.SAP__Message": {
+      "kind": "type",
+      "elements": {
+        "code": {
+          "type": "cds.LargeString"
+        },
+        "message": {
+          "type": "cds.LargeString"
+        },
+        "target": {
+          "type": "cds.LargeString"
+        },
+        "additionalTargets": {
+          "items": {
+            "type": "cds.LargeString"
+          }
+        },
+        "transition": {
+          "type": "cds.Boolean"
+        },
+        "numericSeverity": {
+          "type": "cds.Integer"
+        },
+        "longtextUrl": {
+          "type": "cds.LargeString"
+        }
+      }
+    },
+    "PRODUCT_0001": {
+      "kind": "service",
+      "@cds.external": true
+    }
+  }
+}

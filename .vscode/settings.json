@@ -11,6 +11,6 @@
     "eslint.runtime": "node",
     "eslint.nodePath": "C:\\Users\\Faebu\\AppData\\Roaming\\npm\\node_modules\\@sap\\cds-dk\\node_modules",
     "eslint.options": {
-        "configFile": "C:\\Users\\Faebu\\AppData\\Roaming\\npm\\node_modules\\@sap\\cds-dk\\lib\\lint\\.eslintrc.js"
+        "overrideConfigFile": "C:\\Users\\Faebu\\AppData\\Roaming\\npm\\node_modules\\@sap\\cds-dk\\lib\\lint\\.eslintrc.js"
     }
 }
